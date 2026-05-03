@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "DWARAKA MAI DIGITAL STUDIO | Capture Memories",
+  title: "DWARAKA MAI DIGITAL STUDIO",
   description: "Your one-stop destination for premium gifting, decor, photography, and unforgettable events. Personalized gifts, couple gifts, event management and more.",
   keywords: "Photography, Videography, Personalized Gifts, Event Decor, Digital Studio",
   icons: {
