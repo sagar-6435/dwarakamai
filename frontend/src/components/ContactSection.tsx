@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, Camera, Send } from "lucide-react";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-14 md:py-24 bg-brand-black relative">
+    <section id="contact" className="py-14 md:py-24 bg-brand-white relative">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-5 mix-blend-overlay" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -17,51 +17,51 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">
-              Let's <span className="text-brand-gold">Connect</span>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold text-black mb-6">
+              Let's <span className="text-brand-orange">Connect</span>
             </h2>
-            <p className="text-gray-400 mb-12 max-w-md text-lg">
+            <p className="text-gray-600 mb-12 max-w-md text-lg">
               Ready to capture memories or plan your next event? Reach out to us for bookings, inquiries, or personalized gift requests.
             </p>
 
             <div className="space-y-8">
               <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-brand-charcoal flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold/20 transition-colors">
-                  <Phone className="text-brand-gold" />
+                <div className="w-12 h-12 rounded-full bg-brand-gray flex items-center justify-center flex-shrink-0 group-hover:bg-brand-orange/20 transition-colors">
+                  <Phone className="text-brand-orange" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Phone / WhatsApp</h4>
-                  <p className="text-gray-400 group-hover:text-white transition-colors">+91 98765 43210</p>
+                  <h4 className="text-black font-semibold mb-1">Phone / WhatsApp</h4>
+                  <p className="text-gray-600 group-hover:text-black transition-colors">+91 98765 43210</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-brand-charcoal flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold/20 transition-colors">
-                  <Mail className="text-brand-gold" />
+                <div className="w-12 h-12 rounded-full bg-brand-gray flex items-center justify-center flex-shrink-0 group-hover:bg-brand-orange/20 transition-colors">
+                  <Mail className="text-brand-orange" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Email</h4>
-                  <p className="text-gray-400 group-hover:text-white transition-colors">hello@dwarakamaistudio.com</p>
+                  <h4 className="text-black font-semibold mb-1">Email</h4>
+                  <p className="text-gray-600 group-hover:text-black transition-colors">hello@dwarakamaistudio.com</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-brand-charcoal flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold/20 transition-colors">
-                  <Camera className="text-brand-gold" />
+                <div className="w-12 h-12 rounded-full bg-brand-gray flex items-center justify-center flex-shrink-0 group-hover:bg-brand-orange/20 transition-colors">
+                  <Camera className="text-brand-orange" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Instagram</h4>
-                  <p className="text-gray-400 group-hover:text-white transition-colors">@dwarakamai_studio</p>
+                  <h4 className="text-black font-semibold mb-1">Instagram</h4>
+                  <p className="text-gray-600 group-hover:text-black transition-colors">@dwarakamai_studio</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-brand-charcoal flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold/20 transition-colors">
-                  <MapPin className="text-brand-gold" />
+                <div className="w-12 h-12 rounded-full bg-brand-gray flex items-center justify-center flex-shrink-0 group-hover:bg-brand-orange/20 transition-colors">
+                  <MapPin className="text-brand-orange" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Studio Address</h4>
-                  <p className="text-gray-400 group-hover:text-white transition-colors">123 Luxury Avenue, Cinema Road,<br/>Hyderabad, India 500001</p>
+                  <h4 className="text-black font-semibold mb-1">Studio Address</h4>
+                  <p className="text-gray-600 group-hover:text-black transition-colors">123 Luxury Avenue, Cinema Road,<br/>Hyderabad, India 500001</p>
                 </div>
               </div>
             </div>
@@ -72,29 +72,29 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass p-8 md:p-10 rounded-xl border border-brand-gold/20 relative"
+            className="glass p-8 md:p-10 rounded-xl border border-brand-orange/20 relative"
           >
-            <h3 className="font-heading text-2xl font-bold text-white mb-6">Send an Inquiry</h3>
+            <h3 className="font-heading text-2xl font-bold text-black mb-6">Send an Inquiry</h3>
             <form className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Full Name</label>
                 <input 
                   type="text" 
-                  className="w-full bg-brand-black/50 border border-brand-charcoal-light rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
+                  className="w-full bg-brand-white/50 border border-brand-gray-light rounded-sm px-4 py-3 text-black focus:outline-none focus:border-brand-orange transition-colors"
                   placeholder="John Doe"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Phone Number</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Phone Number</label>
                 <input 
                   type="tel" 
-                  className="w-full bg-brand-black/50 border border-brand-charcoal-light rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
+                  className="w-full bg-brand-white/50 border border-brand-gray-light rounded-sm px-4 py-3 text-black focus:outline-none focus:border-brand-orange transition-colors"
                   placeholder="+91 98765 43210"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Service Needed</label>
-                <select className="w-full bg-brand-black/50 border border-brand-charcoal-light rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors appearance-none">
+                <label className="block text-sm font-medium text-gray-600 mb-2">Service Needed</label>
+                <select className="w-full bg-brand-white/50 border border-brand-gray-light rounded-sm px-4 py-3 text-black focus:outline-none focus:border-brand-orange transition-colors appearance-none">
                   <option>Photography & Videography</option>
                   <option>Event Decoration</option>
                   <option>Personalized Gifts</option>
@@ -104,14 +104,14 @@ export default function ContactSection() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Message</label>
                 <textarea 
                   rows={4}
-                  className="w-full bg-brand-black/50 border border-brand-charcoal-light rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors resize-none"
+                  className="w-full bg-brand-white/50 border border-brand-gray-light rounded-sm px-4 py-3 text-black focus:outline-none focus:border-brand-orange transition-colors resize-none"
                   placeholder="Tell us about your event or requirements..."
                 />
               </div>
-              <button className="w-full py-4 bg-brand-gold text-brand-black font-bold uppercase tracking-wider text-sm rounded-sm hover:bg-brand-gold-light transition-all duration-300 flex items-center justify-center gap-2 mt-4 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+              <button className="w-full py-4 bg-brand-orange text-brand-white font-bold uppercase tracking-wider text-sm rounded-sm hover:bg-brand-orange-light transition-all duration-300 flex items-center justify-center gap-2 mt-4 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                 Send Message <Send size={16} />
               </button>
             </form>

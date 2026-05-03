@@ -39,8 +39,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="w-64 bg-white border-r border-gray-200 flex flex-col h-screen sticky top-0 z-30">
         <div className="p-6 border-b border-gray-100">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-brand-gold rounded-lg flex items-center justify-center text-brand-black font-bold">D</div>
-            <span className="font-bold text-gray-900 tracking-tight">DWARAKA MAI</span>
+            <div className="w-8 h-8 bg-brand-orange rounded-lg flex items-center justify-center text-brand-white font-bold">D</div>
+            <span className="font-bold text-gray-900 tracking-tight">DWARAKAMAI</span>
           </Link>
         </div>
 
@@ -53,7 +53,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={item.href}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   isActive 
-                  ? "bg-brand-gold text-brand-black shadow-lg shadow-brand-gold/20" 
+                  ? "bg-brand-orange text-brand-white shadow-lg shadow-brand-orange/20" 
                   : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
@@ -83,10 +83,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors">
+            <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
               <Bell size={20} />
             </button>
-            <Link href="/admin/profile" className="p-2 text-gray-400 hover:text-gray-900 transition-colors">
+            <Link href="/admin/profile" className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
               <Settings size={20} />
             </Link>
             <div className="h-8 w-[1px] bg-gray-200 mx-2" />
@@ -95,7 +95,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <p className="text-sm font-bold text-gray-900">Admin User</p>
                 <p className="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Super Admin</p>
               </div>
-              <div className="w-10 h-10 bg-gray-100 rounded-full border border-gray-200 flex items-center justify-center text-gray-400">
+              <div className="w-10 h-10 bg-gray-100 rounded-full border border-gray-200 flex items-center justify-center text-gray-600">
                 <Users size={20} />
               </div>
             </div>

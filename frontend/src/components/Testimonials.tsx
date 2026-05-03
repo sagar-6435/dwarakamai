@@ -66,7 +66,7 @@ export default function Testimonials() {
   const t = testimonials[current];
 
   return (
-    <section className="py-14 md:py-24 bg-brand-charcoal border-t border-brand-charcoal-light overflow-hidden">
+    <section className="py-14 md:py-24 bg-brand-gray border-t border-brand-gray-light overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
@@ -74,11 +74,11 @@ export default function Testimonials() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
+            className="font-heading text-3xl md:text-5xl font-bold text-black mb-4"
           >
-            Client <span className="text-brand-gold">Stories</span>
+            Client <span className="text-brand-orange">Stories</span>
           </motion.h2>
-          <p className="text-gray-400">What our customers say about us</p>
+          <p className="text-gray-600">What our customers say about us</p>
         </div>
 
         {/* Carousel */}
@@ -92,12 +92,12 @@ export default function Testimonials() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="bg-brand-black p-6 sm:p-8 md:p-10 rounded-2xl border border-brand-charcoal hover:border-brand-gold/20 transition-colors relative"
+              className="bg-brand-white p-6 sm:p-8 md:p-10 rounded-2xl border border-brand-gray hover:border-brand-orange/20 transition-colors relative"
             >
-              <Quote className="absolute top-6 right-6 text-brand-gold/15 w-12 h-12" />
+              <Quote className="absolute top-6 right-6 text-brand-orange/15 w-12 h-12" />
 
               {/* Stars */}
-              <div className="flex text-brand-gold mb-5">
+              <div className="flex text-brand-orange mb-5">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -106,18 +106,18 @@ export default function Testimonials() {
               </div>
 
               {/* Review text */}
-              <p className="text-gray-300 text-base md:text-lg italic leading-relaxed mb-8 relative z-10">
+              <p className="text-gray-700 text-base md:text-lg italic leading-relaxed mb-8 relative z-10">
                 &ldquo;{t.text}&rdquo;
               </p>
 
               {/* Author */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-brand-charcoal flex items-center justify-center font-heading font-bold text-brand-gold text-xl border border-brand-gold/30 flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-brand-gray flex items-center justify-center font-heading font-bold text-brand-orange text-xl border border-brand-orange/30 flex-shrink-0">
                   {t.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white font-heading">{t.name}</h4>
-                  <p className="text-sm text-brand-gold">{t.role}</p>
+                  <h4 className="font-semibold text-black font-heading">{t.name}</h4>
+                  <p className="text-sm text-brand-orange">{t.role}</p>
                 </div>
               </div>
             </motion.div>
@@ -126,14 +126,14 @@ export default function Testimonials() {
           {/* Prev / Next buttons */}
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 w-10 h-10 rounded-full bg-brand-charcoal border border-brand-charcoal-light text-gray-400 hover:text-brand-gold hover:border-brand-gold flex items-center justify-center transition-all"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 w-10 h-10 rounded-full bg-brand-gray border border-brand-gray-light text-gray-600 hover:text-brand-orange hover:border-brand-orange flex items-center justify-center transition-all"
             aria-label="Previous review"
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 w-10 h-10 rounded-full bg-brand-charcoal border border-brand-charcoal-light text-gray-400 hover:text-brand-gold hover:border-brand-gold flex items-center justify-center transition-all"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 w-10 h-10 rounded-full bg-brand-gray border border-brand-gray-light text-gray-600 hover:text-brand-orange hover:border-brand-orange flex items-center justify-center transition-all"
             aria-label="Next review"
           >
             <ChevronRight size={18} />
@@ -149,8 +149,8 @@ export default function Testimonials() {
               aria-label={`Go to review ${i + 1}`}
               className={`transition-all duration-300 rounded-full ${
                 i === current
-                  ? "w-6 h-2 bg-brand-gold"
-                  : "w-2 h-2 bg-brand-charcoal-light hover:bg-brand-gold/50"
+                  ? "w-6 h-2 bg-brand-orange"
+                  : "w-2 h-2 bg-brand-gray-light hover:bg-brand-orange/50"
               }`}
             />
           ))}

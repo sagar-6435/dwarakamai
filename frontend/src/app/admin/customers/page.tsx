@@ -13,15 +13,15 @@ export default function AdminCustomersPage() {
     <div className="p-8 space-y-6">
       <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between gap-4">
         <div className="relative w-full sm:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" size={18} />
           <input 
             type="text" 
             placeholder="Search customers by name or email..." 
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-gold transition-all"
+            className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-orange transition-all"
           />
         </div>
         <div className="flex gap-2">
-          <button className="px-6 py-2 bg-gray-900 text-white text-sm font-bold rounded-xl hover:bg-black transition-all">Export CSV</button>
+          <button className="px-6 py-2 bg-gray-900 text-black text-sm font-bold rounded-xl hover:bg-black transition-all">Export CSV</button>
         </div>
       </div>
 
@@ -29,11 +29,11 @@ export default function AdminCustomersPage() {
         <table className="w-full text-left">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Customer Name</th>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Contact Info</th>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest text-center">Orders</th>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest text-center">Total Spent</th>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest text-right">Actions</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Customer Name</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Contact Info</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest text-center">Orders</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest text-center">Total Spent</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -56,7 +56,7 @@ export default function AdminCustomersPage() {
                 <td className="px-6 py-4 text-center text-sm font-medium text-gray-700">{customer.orders}</td>
                 <td className="px-6 py-4 text-center font-bold text-gray-900">{customer.totalSpent}</td>
                 <td className="px-6 py-4 text-right">
-                  <button className="p-2 text-gray-400 hover:text-gray-900 rounded-lg transition-colors">
+                  <button className="p-2 text-gray-600 hover:text-gray-900 rounded-lg transition-colors">
                     <MoreVertical size={20} />
                   </button>
                 </td>

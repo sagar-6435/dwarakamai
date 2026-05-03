@@ -23,7 +23,7 @@ const services = [
 
 export default function FeaturedServices() {
   return (
-    <section id="services" className="py-14 md:py-24 bg-brand-black">
+    <section id="services" className="py-14 md:py-24 bg-brand-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
@@ -44,14 +44,14 @@ export default function FeaturedServices() {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-white via-brand-white/50 to-transparent opacity-80" />
               
               <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="font-heading text-2xl font-bold text-white mb-2">{service.title}</h3>
-                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 mb-4">
+                <h3 className="font-heading text-2xl font-bold text-black mb-2">{service.title}</h3>
+                <p className="text-gray-700 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 mb-4">
                   {service.description}
                 </p>
-                <button className="text-brand-gold uppercase tracking-wider text-xs font-semibold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                <button className="text-brand-orange uppercase tracking-wider text-xs font-semibold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
                   Explore More <ArrowRight size={14} />
                 </button>
               </div>

@@ -4,7 +4,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-brand-black flex flex-col">
+    <main className="min-h-screen bg-brand-white flex flex-col">
       <div className="flex-1 w-full">
         <FeaturedServices />
         <WhyChooseUs />

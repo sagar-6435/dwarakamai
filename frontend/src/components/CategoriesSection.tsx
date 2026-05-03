@@ -8,7 +8,7 @@ const categories = [
   { 
     name: "Personalised Gifts", 
     image: "/images/personalised-gifts.jpg",
-    color: "from-brand-gold/20 to-transparent" 
+    color: "from-brand-orange/20 to-transparent" 
   },
   { 
     name: "Couple Gifts", 
@@ -48,12 +48,12 @@ const categories = [
   { 
     name: "Decor Items", 
     image: "/images/event-needs.webp",
-    color: "from-brand-gold-light/20 to-transparent" 
+    color: "from-brand-orange-light/20 to-transparent" 
   },
   { 
     name: "Customized", 
     image: "/images/customized.jpg",
-    color: "from-brand-gold/20 to-transparent" 
+    color: "from-brand-orange/20 to-transparent" 
   },
 ];
 
@@ -74,23 +74,23 @@ const itemVariants = {
 
 export default function CategoriesSection() {
   return (
-    <section id="categories" className="pt-4 pb-14 md:pt-8 md:pb-24 bg-brand-charcoal">
+    <section id="categories" className="pt-4 pb-14 md:pt-8 md:pb-24 bg-brand-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
+            className="font-heading text-3xl md:text-5xl font-bold text-black mb-4"
           >
-            Our <span className="text-brand-gold">Products</span>
+            Our <span className="text-brand-orange">Products</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 max-w-2xl mx-auto"
+            className="text-gray-600 max-w-2xl mx-auto"
           >
             Explore our wide range of premium gifts, decor, and specialized items tailored to make every occasion memorable.
           </motion.p>
@@ -109,7 +109,7 @@ export default function CategoriesSection() {
                 <motion.div
                   variants={itemVariants}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="glass p-2 sm:p-3 md:p-4 rounded-xl flex flex-col items-center justify-center text-center group cursor-pointer hover:border-brand-gold/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+                  className="glass p-2 sm:p-3 md:p-4 rounded-xl flex flex-col items-center justify-center text-center group cursor-pointer hover:border-brand-orange/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
                 >
                   <div className={`relative w-full aspect-square rounded-lg overflow-hidden mb-2 sm:mb-3 md:mb-4 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300`}>
                     <Image
@@ -121,7 +121,7 @@ export default function CategoriesSection() {
                     />
                     <div className={`absolute inset-0 bg-gradient-to-t ${category.color} opacity-60`} />
                   </div>
-                  <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-200 group-hover:text-brand-gold transition-colors duration-300 leading-tight">
+                  <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-200 group-hover:text-brand-orange transition-colors duration-300 leading-tight">
                     {category.name}
                   </h3>
                 </motion.div>
