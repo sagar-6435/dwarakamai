@@ -17,7 +17,7 @@ export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <section id="gallery" className="py-14 md:py-24 bg-brand-charcoal">
+    <section id="gallery" className="py-14 md:py-24 bg-brand-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
@@ -40,9 +40,9 @@ export default function GallerySection() {
                 alt={`Gallery ${image.category}`} 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-brand-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
-                <ZoomIn className="text-brand-gold mb-2 w-10 h-10" />
-                <span className="text-white font-heading text-xl tracking-wider">{image.category}</span>
+              <div className="absolute inset-0 bg-brand-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
+                <ZoomIn className="text-brand-orange mb-2 w-10 h-10" />
+                <span className="text-black font-heading text-xl tracking-wider">{image.category}</span>
               </div>
             </motion.div>
           ))}
@@ -60,7 +60,7 @@ export default function GallerySection() {
             onClick={() => setSelectedImage(null)}
           >
             <button 
-              className="absolute top-6 right-6 text-white hover:text-brand-gold transition-colors"
+              className="absolute top-6 right-6 text-black hover:text-brand-orange transition-colors"
               onClick={() => setSelectedImage(null)}
             >
               <X size={32} />
@@ -71,7 +71,7 @@ export default function GallerySection() {
               exit={{ scale: 0.9 }}
               src={selectedImage}
               alt="Fullscreen Preview"
-              className="max-w-full max-h-[90vh] object-contain rounded-md border border-brand-gold/20 shadow-[0_0_50px_rgba(212,175,55,0.2)]"
+              className="max-w-full max-h-[90vh] object-contain rounded-md border border-brand-orange/20 shadow-[0_0_50px_rgba(212,175,55,0.2)]"
               onClick={(e) => e.stopPropagation()}
             />
           </motion.div>

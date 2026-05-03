@@ -24,13 +24,13 @@ const majorEvents = [
 
 export default function EventsPage() {
   return (
-    <main className="min-h-screen bg-brand-black">
+    <main className="min-h-screen bg-brand-white">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-xs font-bold uppercase tracking-widest mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-bold uppercase tracking-widest mb-6"
           >
             <Sparkles size={14} /> Professional Event Management
           </motion.div>
@@ -38,15 +38,15 @@ export default function EventsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-heading text-4xl md:text-7xl font-bold text-white mb-6"
+            className="font-heading text-4xl md:text-7xl font-bold text-black mb-6"
           >
-            Celebrate Life's <span className="text-brand-gold">Greatest Moments</span>
+            Celebrate Life's <span className="text-brand-orange">Greatest Moments</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+            className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
           >
             Dwaraka Mai Digital Studio isn't just about products; we are creators of experiences. From grand weddings to intimate celebrations, we bring elite planning to every function.
           </motion.p>
@@ -59,7 +59,7 @@ export default function EventsPage() {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex-1 relative w-full aspect-[4/3] md:aspect-video lg:aspect-square rounded-3xl overflow-hidden border border-brand-charcoal"
+                className="flex-1 relative w-full aspect-[4/3] md:aspect-video lg:aspect-square rounded-3xl overflow-hidden border border-brand-gray"
               >
                 <Image 
                   src={event.image}
@@ -67,7 +67,7 @@ export default function EventsPage() {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-white/60 to-transparent" />
               </motion.div>
 
               <motion.div 
@@ -77,20 +77,20 @@ export default function EventsPage() {
                 className="flex-1 space-y-8"
               >
                 <div>
-                  <span className="text-brand-gold font-bold tracking-widest text-sm uppercase">{event.highlight}</span>
-                  <h2 className="text-4xl md:text-5xl font-bold text-white mt-2">{event.title}</h2>
+                  <span className="text-brand-orange font-bold tracking-widest text-sm uppercase">{event.highlight}</span>
+                  <h2 className="text-4xl md:text-5xl font-bold text-black mt-2">{event.title}</h2>
                 </div>
-                <p className="text-gray-400 text-lg leading-relaxed">{event.description}</p>
+                <p className="text-gray-600 text-lg leading-relaxed">{event.description}</p>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {event.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-300">
-                      <CheckCircle2 className="text-brand-gold" size={20} />
+                    <li key={i} className="flex items-center gap-3 text-gray-700">
+                      <CheckCircle2 className="text-brand-orange" size={20} />
                       <span className="text-sm font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="pt-6">
-                  <button className="px-8 py-4 bg-brand-gold text-brand-black font-bold uppercase tracking-widest text-sm rounded-xl hover:bg-brand-gold-light hover:scale-105 transition-all shadow-xl shadow-brand-gold/10">
+                  <button className="px-8 py-4 bg-brand-orange text-brand-white font-bold uppercase tracking-widest text-sm rounded-xl hover:bg-brand-orange-light hover:scale-105 transition-all shadow-xl shadow-brand-orange/10">
                     Inquire Now
                   </button>
                 </div>
@@ -100,21 +100,21 @@ export default function EventsPage() {
         </div>
 
         {/* Trust Factors */}
-        <div className="mt-32 glass p-12 rounded-3xl border border-brand-charcoal grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="mt-32 glass p-12 rounded-3xl border border-brand-gray grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="text-center md:text-left">
-            <ShieldCheck className="text-brand-gold mb-6 mx-auto md:mx-0" size={40} />
-            <h4 className="text-white font-bold text-xl mb-3">End-to-End Planning</h4>
-            <p className="text-gray-400 text-sm">We take care of everything, from venue selection to guest management.</p>
+            <ShieldCheck className="text-brand-orange mb-6 mx-auto md:mx-0" size={40} />
+            <h4 className="text-black font-bold text-xl mb-3">End-to-End Planning</h4>
+            <p className="text-gray-600 text-sm">We take care of everything, from venue selection to guest management.</p>
           </div>
           <div className="text-center md:text-left">
-            <MapPin className="text-brand-gold mb-6 mx-auto md:mx-0" size={40} />
-            <h4 className="text-white font-bold text-xl mb-3">Anywhere Management</h4>
-            <p className="text-gray-400 text-sm">Available for events across the region with seamless local coordination.</p>
+            <MapPin className="text-brand-orange mb-6 mx-auto md:mx-0" size={40} />
+            <h4 className="text-black font-bold text-xl mb-3">Anywhere Management</h4>
+            <p className="text-gray-600 text-sm">Available for events across the region with seamless local coordination.</p>
           </div>
           <div className="text-center md:text-left">
-            <Clock className="text-brand-gold mb-6 mx-auto md:mx-0" size={40} />
-            <h4 className="text-white font-bold text-xl mb-3">Timely Execution</h4>
-            <p className="text-gray-400 text-sm">Punctuality and perfection are the core values of our management team.</p>
+            <Clock className="text-brand-orange mb-6 mx-auto md:mx-0" size={40} />
+            <h4 className="text-black font-bold text-xl mb-3">Timely Execution</h4>
+            <p className="text-gray-600 text-sm">Punctuality and perfection are the core values of our management team.</p>
           </div>
         </div>
       </section>

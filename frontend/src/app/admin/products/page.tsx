@@ -15,18 +15,18 @@ export default function AdminProductsPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
         <div className="flex items-center gap-4 w-full sm:w-auto">
           <div className="relative w-full sm:w-96">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" size={18} />
             <input 
               type="text" 
               placeholder="Search products..." 
-              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-gold transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-orange transition-all"
             />
           </div>
-          <button className="p-2.5 bg-gray-50 border border-gray-200 text-gray-400 rounded-xl hover:text-gray-900 transition-all">
+          <button className="p-2.5 bg-gray-50 border border-gray-200 text-gray-600 rounded-xl hover:text-gray-900 transition-all">
             <Filter size={18} />
           </button>
         </div>
-        <button className="flex items-center gap-2 px-6 py-2.5 bg-brand-gold text-brand-black font-bold rounded-xl hover:bg-brand-gold-light transition-all shadow-lg shadow-brand-gold/20">
+        <button className="flex items-center gap-2 px-6 py-2.5 bg-brand-orange text-brand-white font-bold rounded-xl hover:bg-brand-orange-light transition-all shadow-lg shadow-brand-orange/20">
           <Plus size={18} /> Add Product
         </button>
       </div>
@@ -36,12 +36,12 @@ export default function AdminProductsPage() {
           <table className="w-full text-left min-w-[800px]">
             <thead className="bg-gray-50 border-b border-gray-100">
               <tr>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Product</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Category</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Price</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Stock</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Status</th>
-                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest text-right">Actions</th>
+                <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Product</th>
+                <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Category</th>
+                <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Price</th>
+                <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Stock</th>
+                <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Status</th>
+                <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">

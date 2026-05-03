@@ -14,14 +14,14 @@ export default function CategoriesPage() {
     <div className="p-8 space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
         <div className="relative w-full sm:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" size={18} />
           <input 
             type="text" 
             placeholder="Search categories..." 
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-gold transition-all"
+            className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-orange transition-all"
           />
         </div>
-        <button className="flex items-center gap-2 px-6 py-2.5 bg-brand-gold text-brand-black font-bold rounded-xl hover:bg-brand-gold-light transition-all shadow-lg shadow-brand-gold/20">
+        <button className="flex items-center gap-2 px-6 py-2.5 bg-brand-orange text-brand-white font-bold rounded-xl hover:bg-brand-orange-light transition-all shadow-lg shadow-brand-orange/20">
           <Plus size={18} /> Add Category
         </button>
       </div>
@@ -30,10 +30,10 @@ export default function CategoriesPage() {
         <table className="w-full text-left">
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Category Name</th>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Products</th>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Status</th>
-              <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest text-right">Actions</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Category Name</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Products</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest">Status</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-widest text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -41,7 +41,7 @@ export default function CategoriesPage() {
               <tr key={cat.id} className="hover:bg-gray-50 transition-colors group">
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-brand-gold/10 rounded-lg flex items-center justify-center text-brand-gold">
+                    <div className="w-10 h-10 bg-brand-orange/10 rounded-lg flex items-center justify-center text-brand-orange">
                       <Tag size={20} />
                     </div>
                     <span className="font-bold text-gray-900">{cat.name}</span>

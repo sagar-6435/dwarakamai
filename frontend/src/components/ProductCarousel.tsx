@@ -22,7 +22,7 @@ export default function ProductCarousel() {
   };
 
   return (
-    <section className="py-24 bg-brand-charcoal overflow-hidden">
+    <section className="py-24 bg-brand-gray overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-end mb-12">
           <div>
@@ -30,17 +30,17 @@ export default function ProductCarousel() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-heading text-3xl md:text-5xl font-bold text-white mb-3"
+              className="font-heading text-3xl md:text-5xl font-bold text-black mb-3"
             >
-              Popular <span className="text-brand-gold">Products</span>
+              Popular <span className="text-brand-orange">Products</span>
             </motion.h2>
-            <p className="text-gray-400">Bestsellers from our collection</p>
+            <p className="text-gray-600">Bestsellers from our collection</p>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => scroll("left")} className="w-10 h-10 rounded-full border border-brand-charcoal-light text-gray-400 hover:border-brand-gold hover:text-brand-gold flex items-center justify-center transition-colors">
+            <button onClick={() => scroll("left")} className="w-10 h-10 rounded-full border border-brand-gray-light text-gray-600 hover:border-brand-orange hover:text-brand-orange flex items-center justify-center transition-colors">
               <ChevronLeft size={20} />
             </button>
-            <button onClick={() => scroll("right")} className="w-10 h-10 rounded-full border border-brand-charcoal-light text-gray-400 hover:border-brand-gold hover:text-brand-gold flex items-center justify-center transition-colors">
+            <button onClick={() => scroll("right")} className="w-10 h-10 rounded-full border border-brand-gray-light text-gray-600 hover:border-brand-orange hover:text-brand-orange flex items-center justify-center transition-colors">
               <ChevronRight size={20} />
             </button>
           </div>
@@ -58,16 +58,16 @@ export default function ProductCarousel() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="min-w-[200px] sm:min-w-[240px] md:min-w-[260px] glass rounded-xl overflow-hidden group border border-brand-charcoal hover:border-brand-gold/30 transition-all flex-shrink-0"
+              className="min-w-[200px] sm:min-w-[240px] md:min-w-[260px] glass rounded-xl overflow-hidden group border border-brand-gray hover:border-brand-orange/30 transition-all flex-shrink-0"
             >
               <div className="aspect-square overflow-hidden">
                 <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="p-5">
-                <h3 className="text-white font-semibold mb-1">{product.name}</h3>
+                <h3 className="text-black font-semibold mb-1">{product.name}</h3>
                 <div className="flex justify-between items-center mt-3">
-                  <span className="text-brand-gold font-bold">{product.price}</span>
-                  <button className="px-3 py-1.5 bg-brand-charcoal text-white text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-brand-gold hover:text-brand-black transition-colors">
+                  <span className="text-brand-orange font-bold">{product.price}</span>
+                  <button className="px-3 py-1.5 bg-brand-gray text-black text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-brand-orange hover:text-brand-white transition-colors">
                     Add
                   </button>
                 </div>
@@ -78,7 +78,7 @@ export default function ProductCarousel() {
 
         <div className="mt-8 text-center">
           <Link href="/shop">
-            <button className="inline-flex items-center gap-2 text-brand-gold hover:text-brand-gold-light text-sm font-semibold uppercase tracking-wider transition-colors">
+            <button className="inline-flex items-center gap-2 text-brand-orange hover:text-brand-orange-light text-sm font-semibold uppercase tracking-wider transition-colors">
               View All Products <ArrowRight size={16} />
             </button>
           </Link>

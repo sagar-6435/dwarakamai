@@ -62,11 +62,11 @@ export default function ShopPage() {
   }, [selectedCategory, sortBy]);
 
   return (
-    <main className="min-h-screen bg-brand-black flex flex-col pt-24">
-      <section className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 w-full">
+    <main className="min-h-screen bg-brand-white flex flex-col">
+      <section className="flex-1 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-6 w-full">
         
         {/* Sticky Filter Bar */}
-        <div className="sticky top-[72px] md:top-[80px] z-40 bg-brand-black/95 backdrop-blur-md py-4 mb-8 border-b border-brand-charcoal">
+        <div className="sticky top-[72px] md:top-[80px] z-40 bg-brand-white/95 backdrop-blur-md py-4 mb-8 border-b border-brand-gray">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 md:gap-4 flex-1">
               
@@ -74,14 +74,14 @@ export default function ShopPage() {
               <div className="relative flex-1 sm:flex-initial" ref={categoryRef}>
                 <button 
                   onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                  className="w-full sm:w-56 flex items-center justify-between gap-2 bg-brand-charcoal border border-brand-charcoal-light text-white text-xs md:text-sm py-2.5 px-4 rounded-xl hover:border-brand-gold/50 transition-all"
+                  className="w-full sm:w-56 flex items-center justify-between gap-2 bg-brand-gray border border-brand-gray-light text-black text-xs md:text-sm py-2.5 px-4 rounded-xl hover:border-brand-orange/50 transition-all"
                 >
                   <span className="truncate font-medium">{selectedCategory || "Select Category"}</span>
-                  <ChevronDown size={16} className={`text-brand-gold transition-transform duration-300 ${isCategoryOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown size={16} className={`text-brand-orange transition-transform duration-300 ${isCategoryOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {isCategoryOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-brand-charcoal border border-brand-charcoal-light rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-brand-gray border border-brand-gray-light rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="max-h-[300px] overflow-y-auto py-2 custom-scrollbar">
                       {categories.map((cat) => (
                         <button
@@ -92,8 +92,8 @@ export default function ShopPage() {
                           }}
                           className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between transition-all ${
                             selectedCategory === cat 
-                            ? "bg-brand-gold/10 text-brand-gold font-bold" 
-                            : "text-gray-300 hover:bg-brand-black/50 hover:text-white"
+                            ? "bg-brand-orange/10 text-brand-orange font-bold" 
+                            : "text-gray-700 hover:bg-brand-white/50 hover:text-black"
                           }`}
                         >
                           {cat}
@@ -109,14 +109,14 @@ export default function ShopPage() {
               <div className="relative flex-1 sm:flex-initial" ref={sortRef}>
                 <button 
                   onClick={() => setIsSortOpen(!isSortOpen)}
-                  className="w-full sm:w-48 flex items-center justify-between gap-2 bg-brand-charcoal border border-brand-charcoal-light text-white text-xs md:text-sm py-2.5 px-4 rounded-xl hover:border-brand-gold/50 transition-all"
+                  className="w-full sm:w-48 flex items-center justify-between gap-2 bg-brand-gray border border-brand-gray-light text-black text-xs md:text-sm py-2.5 px-4 rounded-xl hover:border-brand-orange/50 transition-all"
                 >
                   <span className="truncate font-medium">Sort: {sortOptions.find(o => o.value === sortBy)?.label}</span>
-                  <ChevronDown size={16} className={`text-gray-400 transition-transform duration-300 ${isSortOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown size={16} className={`text-gray-600 transition-transform duration-300 ${isSortOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {isSortOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-brand-charcoal border border-brand-charcoal-light rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-brand-gray border border-brand-gray-light rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="py-2">
                       {sortOptions.map((option) => (
                         <button
@@ -127,8 +127,8 @@ export default function ShopPage() {
                           }}
                           className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between transition-all ${
                             sortBy === option.value 
-                            ? "bg-brand-gold/10 text-brand-gold font-bold" 
-                            : "text-gray-300 hover:bg-brand-black/50 hover:text-white"
+                            ? "bg-brand-orange/10 text-brand-orange font-bold" 
+                            : "text-gray-700 hover:bg-brand-white/50 hover:text-black"
                           }`}
                         >
                           {option.label}
@@ -150,9 +150,9 @@ export default function ShopPage() {
         {/* Product Grid */}
         <div className="min-h-[400px]">
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="glass rounded-2xl overflow-hidden group border border-brand-charcoal hover:border-brand-gold/30 transition-all duration-500">
+                <div key={product.id} className="glass rounded-2xl overflow-hidden group border border-brand-gray hover:border-brand-orange/30 transition-all duration-500">
                   <div className="aspect-square overflow-hidden relative">
                     <Image
                       src={product.image}
@@ -161,15 +161,15 @@ export default function ShopPage() {
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute top-3 right-3 z-10 bg-brand-black/80 text-brand-gold text-[10px] font-bold px-2 py-1 rounded-md border border-brand-gold/20 backdrop-blur-sm">
+                    <div className="absolute top-3 right-3 z-10 bg-brand-white/80 text-brand-orange text-[10px] font-bold px-2 py-1 rounded-md border border-brand-orange/20 backdrop-blur-sm">
                       {product.category}
                     </div>
                   </div>
                   <div className="p-4 sm:p-5">
-                    <h3 className="text-white font-semibold mb-1 text-sm md:text-base line-clamp-1 group-hover:text-brand-gold transition-colors">{product.name}</h3>
+                    <h3 className="text-black font-semibold mb-1 text-sm md:text-base line-clamp-1 group-hover:text-brand-orange transition-colors">{product.name}</h3>
                     <div className="flex justify-between items-center mt-3 md:mt-5">
-                      <span className="text-brand-gold font-bold text-base md:text-lg">₹{product.price}</span>
-                      <button className="px-4 py-2 bg-brand-charcoal text-white text-[10px] md:text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-brand-gold hover:text-brand-black transition-all active:scale-95 shadow-lg">
+                      <span className="text-brand-orange font-bold text-base md:text-lg">₹{product.price}</span>
+                      <button className="px-4 py-2 bg-brand-gray text-black text-[10px] md:text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-brand-orange hover:text-brand-white transition-all active:scale-95 shadow-lg">
                         Add
                       </button>
                     </div>
@@ -178,18 +178,18 @@ export default function ShopPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 bg-brand-charcoal/30 rounded-3xl border border-dashed border-brand-charcoal-light">
-              <div className="w-16 h-16 bg-brand-charcoal rounded-full flex items-center justify-center mx-auto mb-4 text-gray-500">
+            <div className="text-center py-20 bg-brand-gray/30 rounded-3xl border border-dashed border-brand-gray-light">
+              <div className="w-16 h-16 bg-brand-gray rounded-full flex items-center justify-center mx-auto mb-4 text-gray-500">
                 <Filter size={32} />
               </div>
-              <h3 className="text-white text-lg font-bold mb-2">No products found</h3>
+              <h3 className="text-black text-lg font-bold mb-2">No products found</h3>
               <p className="text-gray-500 text-sm mb-6">Try adjusting your filters</p>
               <button 
                 onClick={() => {
                   setSelectedCategory("All Products");
                   setSortBy("popularity");
                 }}
-                className="px-6 py-2 bg-brand-gold text-brand-black font-bold text-sm rounded-md hover:bg-brand-gold-light transition-colors"
+                className="px-6 py-2 bg-brand-orange text-brand-white font-bold text-sm rounded-md hover:bg-brand-orange-light transition-colors"
               >
                 Reset All
               </button>

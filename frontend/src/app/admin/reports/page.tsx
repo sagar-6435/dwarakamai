@@ -49,14 +49,14 @@ export default function AdminReportsPage() {
                 key={range}
                 onClick={() => setActiveRange(range)}
                 className={`px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all ${
-                  activeRange === range ? "bg-white text-brand-gold shadow-sm" : "text-gray-400 hover:text-gray-600"
+                  activeRange === range ? "bg-white text-brand-orange shadow-sm" : "text-gray-600 hover:text-gray-600"
                 }`}
               >
                 {range}
               </button>
             ))}
           </div>
-          <button className="flex items-center gap-2 px-6 py-2.5 bg-gray-900 text-white font-bold text-xs rounded-xl hover:bg-black transition-all shadow-lg">
+          <button className="flex items-center gap-2 px-6 py-2.5 bg-gray-900 text-black font-bold text-xs rounded-xl hover:bg-black transition-all shadow-lg">
             <Download size={16} /> Export
           </button>
         </div>
@@ -78,7 +78,7 @@ export default function AdminReportsPage() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{s.label}</p>
+              <p className="text-xs font-bold text-gray-600 uppercase tracking-widest">{s.label}</p>
               <p className="text-3xl font-black text-gray-900 mt-1">{s.value}</p>
             </div>
           </div>
@@ -90,11 +90,11 @@ export default function AdminReportsPage() {
         <div className="flex items-center justify-between mb-10">
           <div>
             <h3 className="text-lg font-bold text-gray-900">Revenue Trends</h3>
-            <p className="text-xs text-gray-400">Daily performance for the current week</p>
+            <p className="text-xs text-gray-600">Daily performance for the current week</p>
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-brand-gold rounded-full" />
+              <div className="w-3 h-3 bg-brand-orange rounded-full" />
               <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Revenue</span>
             </div>
             <div className="flex items-center gap-2">
@@ -107,7 +107,7 @@ export default function AdminReportsPage() {
         {/* Chart Area */}
         <div className="relative h-[350px] w-full mt-4 flex items-end justify-between gap-4 px-4">
           {/* Y-Axis Labels */}
-          <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-[10px] font-bold text-gray-300 py-2">
+          <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-[10px] font-bold text-gray-700 py-2">
             <span>₹10k</span>
             <span>₹7.5k</span>
             <span>₹5k</span>
@@ -128,7 +128,7 @@ export default function AdminReportsPage() {
               <div key={i} className="flex-1 flex flex-col items-center group relative h-full justify-end">
                 {/* Tooltip */}
                 <div className="absolute bottom-full mb-4 opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                  <div className="bg-gray-900 text-white text-[10px] font-bold px-3 py-2 rounded-xl shadow-xl whitespace-nowrap">
+                  <div className="bg-gray-900 text-black text-[10px] font-bold px-3 py-2 rounded-xl shadow-xl whitespace-nowrap">
                     ₹{data.revenue.toLocaleString()} • {data.orders} Orders
                   </div>
                   <div className="w-2 h-2 bg-gray-900 rotate-45 mx-auto -mt-1" />
@@ -139,13 +139,13 @@ export default function AdminReportsPage() {
                   initial={{ height: 0 }}
                   animate={{ height: `${(data.revenue / maxRevenue) * 80}%` }}
                   transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
-                  className="w-full max-w-[40px] bg-brand-gold rounded-t-xl group-hover:bg-brand-gold-light transition-colors relative"
+                  className="w-full max-w-[40px] bg-brand-orange rounded-t-xl group-hover:bg-brand-orange-light transition-colors relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                 </motion.div>
 
                 {/* X-Axis Label */}
-                <span className="text-[10px] font-bold text-gray-400 mt-4 group-hover:text-gray-900 transition-colors uppercase tracking-widest">{data.day}</span>
+                <span className="text-[10px] font-bold text-gray-600 mt-4 group-hover:text-gray-900 transition-colors uppercase tracking-widest">{data.day}</span>
               </div>
             ))}
           </div>
@@ -158,7 +158,7 @@ export default function AdminReportsPage() {
           <h3 className="text-lg font-bold text-gray-900 mb-6">Top Performing Categories</h3>
           <div className="space-y-6">
             {[
-              { name: "Personalized Gifts", share: 45, color: "bg-brand-gold" },
+              { name: "Personalized Gifts", share: 45, color: "bg-brand-orange" },
               { name: "Event Management", share: 30, color: "bg-purple-500" },
               { name: "Cakes & Bouquets", share: 25, color: "bg-blue-500" },
             ].map((cat, i) => (
@@ -184,7 +184,7 @@ export default function AdminReportsPage() {
         <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-bold text-gray-900">Conversion Rate</h3>
-            <span className="text-xs font-bold text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-full">3.2% Overall</span>
+            <span className="text-xs font-bold text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full">3.2% Overall</span>
           </div>
           <div className="flex items-center justify-center py-10">
             <div className="relative w-40 h-40">
@@ -202,11 +202,11 @@ export default function AdminReportsPage() {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-3xl font-black text-gray-900">65%</span>
-                <span className="text-[10px] font-bold text-gray-400 uppercase">Target</span>
+                <span className="text-[10px] font-bold text-gray-600 uppercase">Target</span>
               </div>
             </div>
           </div>
-          <p className="text-center text-xs text-gray-400 px-10 leading-relaxed">
+          <p className="text-center text-xs text-gray-600 px-10 leading-relaxed">
             Your store conversion is currently higher than the industry average for luxury gifting.
           </p>
         </div>
