@@ -19,25 +19,7 @@ export default function GallerySection() {
   return (
     <section id="gallery" className="py-14 md:py-24 bg-brand-charcoal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
-          >
-            Our <span className="text-brand-gold">Portfolio</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-gray-400 max-w-2xl mx-auto"
-          >
-            A glimpse into the beautiful memories we've captured and the elegant setups we've designed.
-          </motion.p>
-        </div>
+
 
         {/* Masonry or Grid Layout */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[300px]">

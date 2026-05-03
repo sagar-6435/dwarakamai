@@ -96,7 +96,25 @@ export default function LoginPage() {
                 </button>
               </div>
             </div>
-
+            {isSignup && (
+              <div>
+                <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wider">Confirm Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    className="w-full bg-brand-charcoal border border-brand-charcoal-light rounded-sm px-4 py-3 pr-12 text-white focus:outline-none focus:border-brand-gold transition-colors placeholder:text-gray-600"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-brand-gold transition-colors"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+            )}
             {!isSignup && (
               <div className="text-right">
                 <button type="button" className="text-xs text-brand-gold hover:text-brand-gold-light transition-colors">
