@@ -35,7 +35,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-brand-black text-foreground font-sans">
+      <body className="min-h-full flex flex-col bg-brand-black text-foreground font-sans pt-18 md:pt-18">
         <Navbar />
         {children}
         <FloatingWhatsApp />

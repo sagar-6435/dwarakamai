@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Menu, X, User, ShoppingCart } from "lucide-react";
 import Link from "next/link";
@@ -9,6 +10,10 @@ import Image from "next/image";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Don't show navbar on admin pages
+  if (pathname?.startsWith("/admin")) return null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,9 +35,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled || mobileMenuOpen ? "bg-brand-black py-4 shadow-lg" : "bg-transparent py-6"
-      }`}
+      className="fixed top-0 w-full z-50 bg-brand-black py-4 shadow-lg border-b border-white/5"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">

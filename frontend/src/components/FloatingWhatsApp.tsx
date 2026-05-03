@@ -1,8 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function FloatingWhatsApp() {
+  const pathname = usePathname();
+  
+  if (pathname?.startsWith("/admin")) return null;
   return (
     <motion.a
       href="https://wa.me/+918897536435" // Replace with actual number
