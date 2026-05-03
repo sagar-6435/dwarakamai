@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Camera, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
 export default function LoginPage() {
   const [isSignup, setIsSignup] = useState(false);
@@ -19,14 +19,7 @@ export default function LoginPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-brand-black/80 via-brand-black/40 to-transparent" />
         <div className="absolute inset-0 flex flex-col justify-end p-12">
-          <Link href="/" className="flex items-center gap-3 mb-auto pt-8">
-            <Camera className="w-8 h-8 text-brand-gold" />
-            <div>
-              <p className="font-heading font-bold text-xl text-white tracking-wider">DWARAKA MAI</p>
-              <p className="text-[10px] text-brand-gold tracking-[0.2em] uppercase">Digital Studio</p>
-            </div>
-          </Link>
-          <blockquote className="mb-8">
+          <blockquote className="mb-8 mt-auto">
             <p className="font-heading text-2xl text-white font-bold leading-snug mb-3">
               "Capture Memories.<br />Create Emotions."
             </p>
@@ -39,15 +32,6 @@ export default function LoginPage() {
 
       {/* Right - Form Panel */}
       <div className="flex-1 flex flex-col justify-center items-center px-6 py-12 md:py-0 md:px-12 lg:px-20">
-        {/* Mobile Logo */}
-        <div className="md:hidden flex items-center gap-3 mb-10">
-          <Camera className="w-7 h-7 text-brand-gold" />
-          <div>
-            <p className="font-heading font-bold text-lg text-white tracking-wider">DWARAKA MAI</p>
-            <p className="text-[10px] text-brand-gold tracking-[0.2em] uppercase">Digital Studio</p>
-          </div>
-        </div>
-
         <div className="w-full max-w-md">
           {/* Toggle */}
           <div className="flex bg-brand-charcoal rounded-sm p-1 mb-8">
@@ -78,7 +62,7 @@ export default function LoginPage() {
                 <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wider">Full Name</label>
                 <input
                   type="text"
-                  placeholder="John Doe"
+                  placeholder="Full Name"
                   className="w-full bg-brand-charcoal border border-brand-charcoal-light rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors placeholder:text-gray-600"
                 />
               </div>

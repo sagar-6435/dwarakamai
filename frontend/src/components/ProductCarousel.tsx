@@ -58,7 +58,7 @@ export default function ProductCarousel() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="min-w-[260px] glass rounded-xl overflow-hidden group border border-brand-charcoal hover:border-brand-gold/30 transition-all flex-shrink-0"
+              className="min-w-[200px] sm:min-w-[240px] md:min-w-[260px] glass rounded-xl overflow-hidden group border border-brand-charcoal hover:border-brand-gold/30 transition-all flex-shrink-0"
             >
               <div className="aspect-square overflow-hidden">
                 <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />

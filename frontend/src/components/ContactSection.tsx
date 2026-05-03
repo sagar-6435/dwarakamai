@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, Camera, Send } from "lucide-react";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-24 bg-brand-black relative">
+    <section id="contact" className="py-14 md:py-24 bg-brand-black relative">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-5 mix-blend-overlay" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

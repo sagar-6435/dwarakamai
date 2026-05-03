@@ -23,9 +23,9 @@ const services = [
 
 export default function FeaturedServices() {
   return (
-    <section id="services" className="py-24 bg-brand-black">
+    <section id="services" className="py-14 md:py-24 bg-brand-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-4">
           <div className="max-w-2xl">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -55,7 +55,7 @@ export default function FeaturedServices() {
           </motion.button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -65,7 +65,7 @@ export default function FeaturedServices() {
               transition={{ delay: index * 0.2 }}
               className="group relative rounded-xl overflow-hidden cursor-pointer"
             >
-              <div className="aspect-[4/5] overflow-hidden">
+              <div className="aspect-[4/3] sm:aspect-[4/4] md:aspect-[4/5] overflow-hidden">
                 <img 
                   src={service.image} 
                   alt={service.title} 

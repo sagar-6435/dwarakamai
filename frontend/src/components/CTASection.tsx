@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="py-24 bg-brand-black relative overflow-hidden">
+    <section className="py-14 md:py-24 bg-brand-black relative overflow-hidden">
       {/* Background glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-gold/8 rounded-full blur-[120px]" />
@@ -28,7 +28,7 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+          className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
         >
           Ready to Make Your{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold-light via-brand-gold to-brand-gold-dark">
@@ -51,15 +51,15 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto"
         >
-          <Link href="/events">
-            <button className="px-10 py-4 bg-brand-gold text-brand-black font-bold uppercase tracking-widest text-sm rounded-sm hover:bg-brand-gold-light hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,175,55,0.35)] flex items-center gap-2">
-              Book an Event <ArrowRight size={18} />
+          <Link href="/services" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-10 py-4 bg-brand-gold text-brand-black font-bold uppercase tracking-widest text-sm rounded-sm hover:bg-brand-gold-light hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,175,55,0.35)] flex items-center justify-center gap-2">
+              Book Now <ArrowRight size={18} />
             </button>
           </Link>
-          <Link href="/shop">
-            <button className="px-10 py-4 bg-transparent text-white font-bold uppercase tracking-widest text-sm rounded-sm border border-brand-charcoal-light hover:border-brand-gold hover:text-brand-gold transition-all">
+          <Link href="/shop" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-10 py-4 bg-transparent text-white font-bold uppercase tracking-widest text-sm rounded-sm border border-brand-charcoal-light hover:border-brand-gold hover:text-brand-gold transition-all">
               Shop Now
             </button>
           </Link>

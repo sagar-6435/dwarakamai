@@ -17,7 +17,7 @@ export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <section id="gallery" className="py-24 bg-brand-charcoal">
+    <section id="gallery" className="py-14 md:py-24 bg-brand-charcoal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
@@ -40,7 +40,7 @@ export default function GallerySection() {
         </div>
 
         {/* Masonry or Grid Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px] md:auto-rows-[300px]">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[300px]">
           {galleryImages.map((image, index) => (
             <motion.div
               key={image.id}

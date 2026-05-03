@@ -44,7 +44,7 @@ export default function ShopPage() {
           </aside>
 
           {/* Product Grid */}
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex-1 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {products.map((product) => (
               <div key={product.id} className="glass rounded-xl overflow-hidden group border border-brand-charcoal hover:border-brand-gold/30 transition-colors">
                 <div className="aspect-square overflow-hidden relative">
@@ -53,12 +53,12 @@ export default function ShopPage() {
                     {product.category}
                   </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="text-white font-semibold mb-2 line-clamp-1">{product.name}</h3>
-                  <div className="flex justify-between items-center mt-4">
-                    <span className="text-brand-gold font-bold">{product.price}</span>
-                    <button className="px-4 py-2 bg-brand-charcoal text-white text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-brand-gold hover:text-brand-black transition-colors">
-                      Add to Cart
+                <div className="p-3 sm:p-4 md:p-5">
+                  <h3 className="text-white font-semibold mb-1 text-sm md:text-base line-clamp-1">{product.name}</h3>
+                  <div className="flex justify-between items-center mt-2 md:mt-4">
+                    <span className="text-brand-gold font-bold text-sm md:text-base">{product.price}</span>
+                    <button className="px-2 md:px-4 py-1.5 md:py-2 bg-brand-charcoal text-white text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-brand-gold hover:text-brand-black transition-colors">
+                      Add
                     </button>
                   </div>
                 </div>

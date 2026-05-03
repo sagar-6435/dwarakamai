@@ -14,7 +14,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section id="about" className="py-24 bg-brand-black relative overflow-hidden">
+    <section id="about" className="py-14 md:py-24 bg-brand-black relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-gold/5 blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-1/2 h-full bg-brand-gold/5 blur-[150px] pointer-events-none" />
@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -50,7 +50,7 @@ export default function WhyChooseUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative p-8 glass rounded-xl border border-brand-charcoal hover:border-brand-gold/30 transition-colors duration-300"
+                className="group relative p-4 md:p-8 glass rounded-xl border border-brand-charcoal hover:border-brand-gold/30 transition-colors duration-300"
               >
                 <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none">
                   <Icon size={100} className="text-brand-gold" />

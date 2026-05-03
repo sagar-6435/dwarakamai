@@ -33,7 +33,7 @@ const highlights = [
 
 export default function EventHighlights() {
   return (
-    <section className="py-24 bg-brand-black relative overflow-hidden">
+    <section className="py-14 md:py-24 bg-brand-black relative overflow-hidden">
       <div className="absolute top-0 left-0 w-72 h-72 bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -56,7 +56,7 @@ export default function EventHighlights() {
           </motion.p>
         </div>
 
-        <div className="space-y-16">
+        <div className="space-y-10 md:space-y-16">
           {highlights.map((item, i) => {
             const Icon = item.icon;
             const isEven = i % 2 === 1;

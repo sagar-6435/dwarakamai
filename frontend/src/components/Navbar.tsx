@@ -31,7 +31,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "glass py-4 shadow-lg" : "bg-transparent py-6"
+        isScrolled || mobileMenuOpen ? "bg-brand-black py-4 shadow-lg" : "bg-transparent py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,23 +99,52 @@ export default function Navbar() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden glass border-t border-brand-gold/20 mt-4"
+          className="md:hidden bg-brand-black border-t border-brand-gold/20"
         >
-          <div className="px-4 pt-2 pb-6 space-y-2 flex flex-col">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-3 text-base uppercase tracking-wider text-gray-300 hover:text-brand-gold hover:bg-brand-charcoal transition-colors duration-300"
-              >
-                {link.name}
+          <div className="px-4 pt-2 pb-6 flex flex-col">
+            {/* Nav Links */}
+            <div className="space-y-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-3 text-base uppercase tracking-wider text-gray-300 hover:text-brand-gold hover:bg-brand-charcoal transition-colors duration-300"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-brand-charcoal-light my-3" />
+
+            {/* Login & Cart */}
+            <Link
+              href="/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 text-base uppercase tracking-wider text-gray-300 hover:text-brand-gold hover:bg-brand-charcoal transition-colors duration-300"
+            >
+              <User size={18} />
+              Login / Account
+            </Link>
+            <Link
+              href="/cart"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 text-base uppercase tracking-wider text-gray-300 hover:text-brand-gold hover:bg-brand-charcoal transition-colors duration-300"
+            >
+              <ShoppingCart size={18} />
+              Cart
+              <span className="ml-auto w-5 h-5 bg-brand-gold text-brand-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
+            </Link>
+
+            {/* Book Now Button */}
+            <div className="pt-3 px-0">
+              <Link href="/services" onClick={() => setMobileMenuOpen(false)}>
+                <button className="w-full py-3 bg-brand-gold text-brand-black font-semibold uppercase tracking-wider text-sm rounded-sm hover:bg-brand-gold-light transition-colors duration-300">
+                  Book Now
+                </button>
               </Link>
-            ))}
-            <div className="pt-4 px-3">
-              <button className="w-full py-3 bg-brand-gold text-brand-black font-semibold uppercase tracking-wider text-sm rounded-sm hover:bg-brand-gold-light transition-colors duration-300">
-                Book Now
-              </button>
             </div>
           </div>
         </motion.div>

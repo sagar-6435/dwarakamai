@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { 
   Gift, 
   Shirt, 
@@ -42,7 +43,7 @@ const itemVariants = {
 
 export default function CategoriesSection() {
   return (
-    <section id="categories" className="py-24 bg-brand-charcoal">
+    <section id="categories" className="py-14 md:py-24 bg-brand-charcoal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
@@ -69,24 +70,25 @@ export default function CategoriesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+          className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
         >
           {categories.map((category, index) => {
             const Icon = category.icon;
             return (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="glass p-6 rounded-lg flex flex-col items-center justify-center text-center group cursor-pointer hover:border-brand-gold/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
-              >
-                <div className={`p-4 rounded-full bg-brand-black/50 mb-4 group-hover:scale-110 transition-transform duration-300 ${category.color}`}>
-                  <Icon size={32} />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-200 group-hover:text-brand-gold transition-colors duration-300">
-                  {category.name}
-                </h3>
-              </motion.div>
+              <Link href="/shop" key={index}>
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="glass p-3 sm:p-4 md:p-6 rounded-lg flex flex-col items-center justify-center text-center group cursor-pointer hover:border-brand-gold/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+                >
+                  <div className={`p-2 sm:p-3 md:p-4 rounded-full bg-brand-black/50 mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300 ${category.color}`}>
+                    <Icon size={22} className="sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                  </div>
+                  <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-200 group-hover:text-brand-gold transition-colors duration-300 leading-tight">
+                    {category.name}
+                  </h3>
+                </motion.div>
+              </Link>
             );
           })}
         </motion.div>
