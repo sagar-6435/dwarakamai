@@ -25,35 +25,7 @@ export default function FeaturedServices() {
   return (
     <section id="services" className="py-14 md:py-24 bg-brand-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-4">
-          <div className="max-w-2xl">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
-            >
-              Premium <span className="text-brand-gold">Services</span>
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-gray-400"
-            >
-              Beyond products, we offer professional services to capture your memories and elevate your events to the next level.
-            </motion.p>
-          </div>
-          <motion.button 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2 text-brand-gold hover:text-brand-gold-light transition-colors uppercase tracking-wider text-sm font-semibold whitespace-nowrap"
-          >
-            View All Services <ArrowRight size={16} />
-          </motion.button>
-        </div>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
           {services.map((service, index) => (

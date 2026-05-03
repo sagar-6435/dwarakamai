@@ -1,70 +1,200 @@
+"use client";
+
+import { useState, useMemo, useRef, useEffect } from "react";
 import Footer from "@/components/Footer";
+import Image from "next/image";
+import { ChevronDown, Filter, LayoutGrid, Check } from "lucide-react";
 
 const products = [
-  { id: 1, name: "Passport Photos (Set of 8)", price: "₹100", category: "Prints", image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=500&auto=format&fit=crop" },
-  { id: 2, name: "Custom Printed Mug", price: "₹299", category: "Gifts", image: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?q=80&w=500&auto=format&fit=crop" },
-  { id: 3, name: "Personalized Photo Pillow", price: "₹499", category: "Gifts", image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=500&auto=format&fit=crop" },
-  { id: 4, name: "Premium Wooden Frame", price: "₹899", category: "Frames", image: "https://images.unsplash.com/photo-1583847268964-b28ce8f30e92?q=80&w=500&auto=format&fit=crop" },
-  { id: 5, name: "Wedding Photo Album", price: "₹2500", category: "Albums", image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=500&auto=format&fit=crop" },
-  { id: 6, name: "Instant Polaroid Prints", price: "₹50", category: "Prints", image: "https://images.unsplash.com/photo-1526178613552-2b45c6c302f0?q=80&w=500&auto=format&fit=crop" },
+  { id: 1, name: "Personalised Crystal Gift", price: 1499, category: "Gifts", image: "/images/personalised-gifts.jpg", popularity: 95 },
+  { id: 2, name: "Anniversary Heart Frame", price: 899, category: "Couple Gifts", image: "/images/couple-gifts.png", popularity: 88 },
+  { id: 3, name: "Premium Gallery Photo Frame", price: 1200, category: "Frames", image: "/images/photo-frames.webp", popularity: 92 },
+  { id: 4, name: "Custom Printed Premium T-Shirt", price: 499, category: "Apparel", image: "/images/t-shirts.png", popularity: 85 },
+  { id: 5, name: "Designer Celebration Cake", price: 950, category: "Cakes", image: "/images/cakes.jpg", popularity: 98 },
+  { id: 6, name: "Exotic Mixed Flower Bouquet", price: 599, category: "Bouquets", image: "/images/bouquets.jpg", popularity: 80 },
+  { id: 7, name: "Tabletop Succulent Plant", price: 349, category: "Plants", image: "/images/plants.jpg", popularity: 75 },
+  { id: 8, name: "Bulk Document Printing Service", price: 2, category: "Printing", image: "/images/printing-works.jpg", popularity: 70 },
+  { id: 9, name: "Event Decor Essentials Kit", price: 4500, category: "Events", image: "/images/event-needs.webp", popularity: 60 },
+  { id: 10, name: "Customised Surprise Box", price: 1999, category: "Gifts", image: "/images/customized.jpg", popularity: 82 },
+];
+
+const categories = ["All Products", "Gifts", "Couple Gifts", "Frames", "Apparel", "Cakes", "Bouquets", "Plants", "Printing", "Events"];
+const sortOptions = [
+  { label: "Popularity", value: "popularity" },
+  { label: "Price: Low-High", value: "price-low" },
+  { label: "Price: High-Low", value: "price-high" },
 ];
 
 export default function ShopPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All Products");
+  const [sortBy, setSortBy] = useState("popularity");
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  
+  const categoryRef = useRef<HTMLDivElement>(null);
+  const sortRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (categoryRef.current && !categoryRef.current.contains(event.target as Node)) setIsCategoryOpen(false);
+      if (sortRef.current && !sortRef.current.contains(event.target as Node)) setIsSortOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredProducts = useMemo(() => {
+    let result = [...products];
+
+    if (selectedCategory !== "All Products") {
+      result = result.filter((p) => p.category === selectedCategory);
+    }
+
+    result.sort((a, b) => {
+      if (sortBy === "price-low") return a.price - b.price;
+      if (sortBy === "price-high") return b.price - a.price;
+      if (sortBy === "popularity") return b.popularity - a.popularity;
+      return 0;
+    });
+
+    return result;
+  }, [selectedCategory, sortBy]);
+
   return (
     <main className="min-h-screen bg-brand-black flex flex-col pt-24">
-      <section className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
-          Our <span className="text-brand-gold">Shop</span>
-        </h1>
-        <p className="text-gray-400 mb-10 max-w-2xl">
-          Browse our collection of custom printing services, premium frames, and personalized gifts.
-        </p>
+      <section className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 w-full">
+        
+        {/* Sticky Filter Bar */}
+        <div className="sticky top-[72px] md:top-[80px] z-40 bg-brand-black/95 backdrop-blur-md py-4 mb-8 border-b border-brand-charcoal">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 md:gap-4 flex-1">
+              
+              {/* Custom Category Dropdown */}
+              <div className="relative flex-1 sm:flex-initial" ref={categoryRef}>
+                <button 
+                  onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+                  className="w-full sm:w-56 flex items-center justify-between gap-2 bg-brand-charcoal border border-brand-charcoal-light text-white text-xs md:text-sm py-2.5 px-4 rounded-xl hover:border-brand-gold/50 transition-all"
+                >
+                  <span className="truncate font-medium">{selectedCategory || "Select Category"}</span>
+                  <ChevronDown size={16} className={`text-brand-gold transition-transform duration-300 ${isCategoryOpen ? "rotate-180" : ""}`} />
+                </button>
 
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <aside className="w-full md:w-64 space-y-8">
-            <div>
-              <h3 className="text-white font-semibold mb-4 border-b border-brand-charcoal-light pb-2">Categories</h3>
-              <ul className="space-y-2">
-                {["All Products", "Prints", "Gifts", "Frames", "Albums"].map((cat) => (
-                  <li key={cat}>
-                    <button className="text-gray-400 hover:text-brand-gold transition-colors text-sm">{cat}</button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold mb-4 border-b border-brand-charcoal-light pb-2">Price Range</h3>
-              <div className="flex items-center gap-2">
-                <input type="number" placeholder="Min" className="w-full bg-brand-charcoal border border-brand-charcoal-light rounded-sm px-2 py-1 text-sm text-white focus:border-brand-gold outline-none" />
-                <span className="text-gray-500">-</span>
-                <input type="number" placeholder="Max" className="w-full bg-brand-charcoal border border-brand-charcoal-light rounded-sm px-2 py-1 text-sm text-white focus:border-brand-gold outline-none" />
+                {isCategoryOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-brand-charcoal border border-brand-charcoal-light rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="max-h-[300px] overflow-y-auto py-2 custom-scrollbar">
+                      {categories.map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => {
+                            setSelectedCategory(cat);
+                            setIsCategoryOpen(false);
+                          }}
+                          className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between transition-all ${
+                            selectedCategory === cat 
+                            ? "bg-brand-gold/10 text-brand-gold font-bold" 
+                            : "text-gray-300 hover:bg-brand-black/50 hover:text-white"
+                          }`}
+                        >
+                          {cat}
+                          {selectedCategory === cat && <Check size={14} />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Custom Sort Dropdown */}
+              <div className="relative flex-1 sm:flex-initial" ref={sortRef}>
+                <button 
+                  onClick={() => setIsSortOpen(!isSortOpen)}
+                  className="w-full sm:w-48 flex items-center justify-between gap-2 bg-brand-charcoal border border-brand-charcoal-light text-white text-xs md:text-sm py-2.5 px-4 rounded-xl hover:border-brand-gold/50 transition-all"
+                >
+                  <span className="truncate font-medium">Sort: {sortOptions.find(o => o.value === sortBy)?.label}</span>
+                  <ChevronDown size={16} className={`text-gray-400 transition-transform duration-300 ${isSortOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {isSortOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-brand-charcoal border border-brand-charcoal-light rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="py-2">
+                      {sortOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => {
+                            setSortBy(option.value);
+                            setIsSortOpen(false);
+                          }}
+                          className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between transition-all ${
+                            sortBy === option.value 
+                            ? "bg-brand-gold/10 text-brand-gold font-bold" 
+                            : "text-gray-300 hover:bg-brand-black/50 hover:text-white"
+                          }`}
+                        >
+                          {option.label}
+                          {sortBy === option.value && <Check size={14} />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          </aside>
 
-          {/* Product Grid */}
-          <div className="flex-1 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-            {products.map((product) => (
-              <div key={product.id} className="glass rounded-xl overflow-hidden group border border-brand-charcoal hover:border-brand-gold/30 transition-colors">
-                <div className="aspect-square overflow-hidden relative">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute top-2 right-2 bg-brand-black/80 text-brand-gold text-xs px-2 py-1 rounded-sm border border-brand-gold/20">
-                    {product.category}
-                  </div>
-                </div>
-                <div className="p-3 sm:p-4 md:p-5">
-                  <h3 className="text-white font-semibold mb-1 text-sm md:text-base line-clamp-1">{product.name}</h3>
-                  <div className="flex justify-between items-center mt-2 md:mt-4">
-                    <span className="text-brand-gold font-bold text-sm md:text-base">{product.price}</span>
-                    <button className="px-2 md:px-4 py-1.5 md:py-2 bg-brand-charcoal text-white text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-brand-gold hover:text-brand-black transition-colors">
-                      Add
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <div className="hidden lg:block text-xs text-gray-500 uppercase tracking-widest font-bold">
+              {filteredProducts.length} Results
+            </div>
           </div>
+        </div>
+
+        {/* Product Grid */}
+        <div className="min-h-[400px]">
+          {filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              {filteredProducts.map((product) => (
+                <div key={product.id} className="glass rounded-2xl overflow-hidden group border border-brand-charcoal hover:border-brand-gold/30 transition-all duration-500">
+                  <div className="aspect-square overflow-hidden relative">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 right-3 z-10 bg-brand-black/80 text-brand-gold text-[10px] font-bold px-2 py-1 rounded-md border border-brand-gold/20 backdrop-blur-sm">
+                      {product.category}
+                    </div>
+                  </div>
+                  <div className="p-4 sm:p-5">
+                    <h3 className="text-white font-semibold mb-1 text-sm md:text-base line-clamp-1 group-hover:text-brand-gold transition-colors">{product.name}</h3>
+                    <div className="flex justify-between items-center mt-3 md:mt-5">
+                      <span className="text-brand-gold font-bold text-base md:text-lg">₹{product.price}</span>
+                      <button className="px-4 py-2 bg-brand-charcoal text-white text-[10px] md:text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-brand-gold hover:text-brand-black transition-all active:scale-95 shadow-lg">
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 bg-brand-charcoal/30 rounded-3xl border border-dashed border-brand-charcoal-light">
+              <div className="w-16 h-16 bg-brand-charcoal rounded-full flex items-center justify-center mx-auto mb-4 text-gray-500">
+                <Filter size={32} />
+              </div>
+              <h3 className="text-white text-lg font-bold mb-2">No products found</h3>
+              <p className="text-gray-500 text-sm mb-6">Try adjusting your filters</p>
+              <button 
+                onClick={() => {
+                  setSelectedCategory("All Products");
+                  setSortBy("popularity");
+                }}
+                className="px-6 py-2 bg-brand-gold text-brand-black font-bold text-sm rounded-md hover:bg-brand-gold-light transition-colors"
+              >
+                Reset All
+              </button>
+            </div>
+          )}
         </div>
       </section>
       <Footer />

@@ -2,28 +2,59 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { 
-  Gift, 
-  Shirt, 
-  Leaf, 
-  Image as ImageIcon, 
-  Printer, 
-  Paintbrush, 
-  Cake, 
-  Flower2, 
-  Heart 
-} from "lucide-react";
+import Image from "next/image";
 
 const categories = [
-  { name: "Personalised Gifts", icon: Gift, color: "text-brand-gold" },
-  { name: "Couple Gifts", icon: Heart, color: "text-red-400" },
-  { name: "T-Shirts", icon: Shirt, color: "text-blue-400" },
-  { name: "Plants", icon: Leaf, color: "text-green-400" },
-  { name: "Photo Frames", icon: ImageIcon, color: "text-purple-400" },
-  { name: "Printing Works", icon: Printer, color: "text-gray-300" },
-  { name: "Decor Items", icon: Paintbrush, color: "text-brand-gold-light" },
-  { name: "Cakes", icon: Cake, color: "text-pink-400" },
-  { name: "Bouquets", icon: Flower2, color: "text-rose-400" },
+  { 
+    name: "Personalised Gifts", 
+    image: "/images/personalised-gifts.jpg",
+    color: "from-brand-gold/20 to-transparent" 
+  },
+  { 
+    name: "Couple Gifts", 
+    image: "/images/couple-gifts.png",
+    color: "from-red-500/20 to-transparent" 
+  },
+  { 
+    name: "Photo Frames", 
+    image: "/images/photo-frames.webp",
+    color: "from-purple-500/20 to-transparent" 
+  },
+  { 
+    name: "T-Shirts", 
+    image: "/images/t-shirts.png",
+    color: "from-blue-500/20 to-transparent" 
+  },
+  { 
+    name: "Cakes", 
+    image: "/images/cakes.jpg",
+    color: "from-pink-500/20 to-transparent" 
+  },
+  { 
+    name: "Bouquets", 
+    image: "/images/bouquets.jpg",
+    color: "from-rose-500/20 to-transparent" 
+  },
+  { 
+    name: "Plants", 
+    image: "/images/plants.jpg",
+    color: "from-green-500/20 to-transparent" 
+  },
+  { 
+    name: "Printing Works", 
+    image: "/images/printing-works.jpg",
+    color: "from-gray-500/20 to-transparent" 
+  },
+  { 
+    name: "Decor Items", 
+    image: "/images/event-needs.webp",
+    color: "from-brand-gold-light/20 to-transparent" 
+  },
+  { 
+    name: "Customized", 
+    image: "/images/customized.jpg",
+    color: "from-brand-gold/20 to-transparent" 
+  },
 ];
 
 const containerVariants = {
@@ -43,7 +74,7 @@ const itemVariants = {
 
 export default function CategoriesSection() {
   return (
-    <section id="categories" className="py-14 md:py-24 bg-brand-charcoal">
+    <section id="categories" className="pt-4 pb-14 md:pt-8 md:pb-24 bg-brand-charcoal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
@@ -73,16 +104,22 @@ export default function CategoriesSection() {
           className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
         >
           {categories.map((category, index) => {
-            const Icon = category.icon;
             return (
               <Link href="/shop" key={index}>
                 <motion.div
                   variants={itemVariants}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="glass p-3 sm:p-4 md:p-6 rounded-lg flex flex-col items-center justify-center text-center group cursor-pointer hover:border-brand-gold/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+                  className="glass p-2 sm:p-3 md:p-4 rounded-xl flex flex-col items-center justify-center text-center group cursor-pointer hover:border-brand-gold/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
                 >
-                  <div className={`p-2 sm:p-3 md:p-4 rounded-full bg-brand-black/50 mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300 ${category.color}`}>
-                    <Icon size={22} className="sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                  <div className={`relative w-full aspect-square rounded-lg overflow-hidden mb-2 sm:mb-3 md:mb-4 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300`}>
+                    <Image
+                      src={category.image}
+                      alt={category.name}
+                      fill
+                      sizes="(max-width: 768px) 33vw, 20vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${category.color} opacity-60`} />
                   </div>
                   <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-200 group-hover:text-brand-gold transition-colors duration-300 leading-tight">
                     {category.name}
