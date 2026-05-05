@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Cart, CartDocument } from '../schemas/cart.schema';
 import { Product, ProductDocument } from '../schemas/product.schema';
 
@@ -47,7 +47,7 @@ export class CartService {
       if (existingItem) {
         existingItem.quantity += quantity;
       } else {
-        cart.items.push({ product: productId, quantity });
+        cart.items.push({ product: new Types.ObjectId(productId), quantity });
       }
     }
 

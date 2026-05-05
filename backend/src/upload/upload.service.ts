@@ -34,14 +34,14 @@ export class UploadService {
         );
 
         uploadStream.end(file.buffer);
-      });
+      }) as any;
 
       return {
         message: 'Image uploaded successfully',
         url: result.secure_url,
         publicId: result.public_id,
       };
-    } catch (error) {
+    } catch (error: any) {
       throw new BadRequestException(`Upload failed: ${error.message}`);
     }
   }
@@ -50,7 +50,7 @@ export class UploadService {
     try {
       await cloudinary.uploader.destroy(publicId);
       return { message: 'Image deleted successfully' };
-    } catch (error) {
+    } catch (error: any) {
       throw new BadRequestException(`Delete failed: ${error.message}`);
     }
   }
@@ -81,7 +81,7 @@ export class UploadService {
           );
 
           uploadStream.end(file.buffer);
-        });
+        }) as any;
 
         results.push({
           url: result.secure_url,

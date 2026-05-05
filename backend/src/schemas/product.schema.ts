@@ -29,7 +29,7 @@ export class Product {
   @Prop([String])
   images: string[];
 
-  @Prop()
+  @Prop({ type: Object })
   specifications: Record<string, string>;
 
   @Prop({ default: false })
