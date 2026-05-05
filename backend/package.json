@@ -1,0 +1,46 @@
+{
+  "name": "dwarakamai-backend",
+  "version": "1.0.0",
+  "description": "Backend for Dwaraka Mai Digital Studio",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "nest start --watch",
+    "build": "nest build",
+    "start": "node dist/main.js",
+    "start:prod": "node dist/main.js",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.2.10",
+    "@nestjs/core": "^10.2.10",
+    "@nestjs/jwt": "^11.0.1",
+    "@nestjs/mongoose": "^10.0.1",
+    "@nestjs/passport": "^10.0.3",
+    "@nestjs/platform-express": "^10.2.10",
+    "mongoose": "^7.5.0",
+    "cloudinary": "^1.40.0",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.2.1",
+    "@nestjs/schematics": "^10.0.2",
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.0",
+    "@types/multer": "^1.4.8",
+    "@types/passport-jwt": "^3.0.11",
+    "typescript": "^5.2.2",
+    "ts-loader": "^9.5.0",
+    "eslint": "^8.50.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5"
+  }
+}
