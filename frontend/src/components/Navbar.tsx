@@ -12,16 +12,17 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Don't show navbar on admin pages
-  if (pathname?.startsWith("/admin")) return null;
-
   useEffect(() => {
+    if (pathname?.startsWith("/admin")) return;
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
+
+  // Don't show navbar on admin pages (after hooks — Rules of Hooks)
+  if (pathname?.startsWith("/admin")) return null;
 
   const navLinks = [
     { name: "Home", href: "/" },

@@ -11,6 +11,7 @@ import { EventsModule } from './events/events.module';
 import { CartModule } from './cart/cart.module';
 import { ServiceBookingsModule } from './service-bookings/service-bookings.module';
 import { UploadModule } from './upload/upload.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UploadModule } from './upload/upload.module';
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost:27017/dwarakamai'),
+    SeedModule,
     AuthModule,
     ProductsModule,
     CategoriesModule,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { 
   LayoutDashboard, 
   Tag, 
@@ -16,7 +16,9 @@ import {
   Bell
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { apiFetch } from "@/lib/api";
+import { clearToken, type AuthUser } from "@/lib/auth";
 
 const menuItems = [
   { name: "Dashboard", icon: <LayoutDashboard size={20} />, href: "/admin" },
@@ -32,6 +34,53 @@ const menuItems = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [adminUser, setAdminUser] = useState<AuthUser | null>(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let cancel = false;
+    const run = async () => {
+      const token =
+        typeof window !== "undefined" ? localStorage.getItem("dwarakamai_token") : null;
+      if (!token) {
+        router.replace(`/login?next=${encodeURIComponent(pathname || "/admin")}`);
+        if (!cancel) setReady(true);
+        return;
+      }
+      try {
+        const data = await apiFetch<{ user: AuthUser }>("/auth/me");
+        if (cancel) return;
+        if (data.user.role !== "admin") {
+          router.replace("/");
+          return;
+        }
+        setAdminUser(data.user);
+      } catch {
+        if (cancel) return;
+        clearToken();
+        router.replace(`/login?next=${encodeURIComponent(pathname || "/admin")}`);
+      } finally {
+        if (!cancel) setReady(true);
+      }
+    };
+    run();
+    return () => {
+      cancel = true;
+    };
+  }, [pathname, router]);
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA] text-gray-600 text-sm font-medium">
+        Verifying admin access…
+      </div>
+    );
+  }
+
+  if (!adminUser) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex">
@@ -65,7 +114,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         <div className="p-4 border-t border-gray-100">
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-rose-600 hover:bg-rose-50 transition-all">
+          <button
+            type="button"
+            onClick={() => {
+              clearToken();
+              router.push("/login");
+            }}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-rose-600 hover:bg-rose-50 transition-all"
+          >
             <LogOut size={20} />
             Logout
           </button>
@@ -92,8 +148,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="h-8 w-[1px] bg-gray-200 mx-2" />
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-bold text-gray-900">Admin User</p>
-                <p className="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Super Admin</p>
+                <p className="text-sm font-bold text-gray-900">{adminUser.name}</p>
+                <p className="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">{adminUser.email}</p>
               </div>
               <div className="w-10 h-10 bg-gray-100 rounded-full border border-gray-200 flex items-center justify-center text-gray-600">
                 <Users size={20} />
