@@ -49,11 +49,11 @@ export default function Navbar() {
               className="rounded-sm group-hover:scale-110 transition-transform duration-300"
             />
             <div className="flex flex-col">
-              <span className="font-heading font-bold text-xl tracking-wider text-black">
+              <span className="font-heading font-bold text-xl tracking-wider text-brand-orange">
                 DWARAKAMAI
               </span>
               <span className="text-[10px] tracking-[0.2em] text-brand-orange uppercase">
-                Digital Studio
+                Digital Photo Studio
               </span>
             </div>
           </Link>

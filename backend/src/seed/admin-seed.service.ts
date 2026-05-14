@@ -41,7 +41,10 @@ export class AdminSeedService implements OnModuleInit {
         await existing.save();
         this.logger.log(`Updated existing user ${email} to admin role`);
       } else {
-        this.logger.log(`Admin user ${email} already exists — skip`);
+        // Update password in case it changed in env
+        existing.password = password;
+        await existing.save();
+        this.logger.log(`Updated admin user ${email} password`);
       }
       return;
     }

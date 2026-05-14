@@ -14,11 +14,6 @@ const services = [
     description: "Premium decoration and end-to-end management for your most important celebrations.",
     image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=800&auto=format&fit=crop",
   },
-  {
-    title: "Home & Shop Redecor",
-    description: "Transform your living or workspace with our luxury interior decoration services.",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
-  },
 ];
 
 export default function FeaturedServices() {
@@ -27,7 +22,7 @@ export default function FeaturedServices() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-10 max-w-4xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={index}

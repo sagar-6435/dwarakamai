@@ -83,7 +83,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-brand-white flex flex-col md:flex-row">
+    <main className="min-h-screen bg-brand-white flex flex-col md:flex-row" suppressHydrationWarning>
       <div className="hidden md:flex md:w-1/2 relative overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop"
