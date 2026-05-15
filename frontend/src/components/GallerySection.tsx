@@ -1,67 +1,170 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ZoomIn } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { apiFetch } from "@/lib/api";
 
-const galleryImages = [
-  { id: 1, category: "Wedding", url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" },
-  { id: 2, category: "Decor", url: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop" },
-  { id: 3, category: "Gifts", url: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800&auto=format&fit=crop" },
-  { id: 4, category: "Cakes", url: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop" },
-  { id: 5, category: "Printing", url: "https://images.unsplash.com/photo-1627042633145-b780d842ba45?q=80&w=800&auto=format&fit=crop" },
-  { id: 6, category: "Event", url: "https://images.unsplash.com/photo-1478146896981-b80fe463b330?q=80&w=800&auto=format&fit=crop" },
-];
+type GalleryItem = {
+  _id: string;
+  title: string;
+  image: string;
+  category?: string;
+};
+
+// Categories reserved for the two side panels
+const SIDE1_CAT = "__side1";
+const SIDE2_CAT = "__side2";
 
 export default function GallerySection() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [carouselItems, setCarouselItems] = useState<GalleryItem[]>([]);
+  const [side1, setSide1] = useState<GalleryItem | null>(null);
+  const [side2, setSide2] = useState<GalleryItem | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [lightbox, setLightbox] = useState<string | null>(null);
+
+  useEffect(() => {
+    apiFetch<{ gallery: GalleryItem[] }>("/gallery?page=1&limit=50")
+      .then((res) => {
+        const all = res.gallery;
+        setSide1(all.find((i) => i.category === SIDE1_CAT) ?? null);
+        setSide2(all.find((i) => i.category === SIDE2_CAT) ?? null);
+        // carousel = everything except side panel items, max 7
+        const carousel = all
+          .filter((i) => i.category !== SIDE1_CAT && i.category !== SIDE2_CAT)
+          .slice(0, 7);
+        setCarouselItems(carousel);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  const prev = useCallback(() =>
+    setCurrent((c) => (c - 1 + carouselItems.length) % carouselItems.length),
+    [carouselItems.length]
+  );
+
+  const next = useCallback(() =>
+    setCurrent((c) => (c + 1) % carouselItems.length),
+    [carouselItems.length]
+  );
+
+  // Auto-advance carousel
+  useEffect(() => {
+    if (carouselItems.length < 2) return;
+    const id = setInterval(next, 4000);
+    return () => clearInterval(id);
+  }, [carouselItems.length, next]);
+
+  const activeItem = carouselItems[current];
 
   return (
-    <section id="gallery" className="py-14 md:py-24 bg-brand-gray">
+    <section id="gallery" className="py-14 md:py-20 bg-brand-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {loading ? (
+          <div className="flex gap-4 h-[420px]">
+            <div className="flex-1 rounded-2xl bg-gray-200 animate-pulse" />
+            <div className="w-[320px] flex flex-col gap-4">
+              <div className="flex-1 rounded-2xl bg-gray-200 animate-pulse" />
+              <div className="flex-1 rounded-2xl bg-gray-200 animate-pulse" />
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col md:flex-row gap-4 h-auto md:h-[480px]">
 
+            {/* ── Left: Carousel ── */}
+            <div className="relative flex-1 rounded-2xl overflow-hidden bg-gray-100 min-h-[280px] md:min-h-0 group">
+              {carouselItems.length === 0 ? (
+                <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                  No gallery images yet.
+                </div>
+              ) : (
+                <>
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeItem._id}
+                      src={activeItem.image}
+                      alt={activeItem.title}
+                      initial={{ opacity: 0, scale: 1.04 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.97 }}
+                      transition={{ duration: 0.5 }}
+                      className="w-full h-full object-cover cursor-pointer"
+                      onClick={() => setLightbox(activeItem.image)}
+                    />
+                  </AnimatePresence>
 
-        {/* Masonry or Grid Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[300px]">
-          {galleryImages.map((image, index) => (
-            <motion.div
-              key={image.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`relative group overflow-hidden rounded-lg cursor-pointer ${
-                index === 0 || index === 3 ? "md:col-span-2 md:row-span-2" : ""
-              }`}
-              onClick={() => setSelectedImage(image.url)}
-            >
-              <img 
-                src={image.url} 
-                alt={`Gallery ${image.category}`} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-brand-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
-                <ZoomIn className="text-brand-orange mb-2 w-10 h-10" />
-                <span className="text-black font-heading text-xl tracking-wider">{image.category}</span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  {/* Zoom hint */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="bg-black/30 rounded-full p-3">
+                      <ZoomIn className="text-white w-7 h-7" />
+                    </div>
+                  </div>
+
+                  {/* Prev / Next */}
+                  {carouselItems.length > 1 && (
+                    <>
+                      <button
+                        onClick={prev}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow transition-all"
+                        aria-label="Previous"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+                      <button
+                        onClick={next}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow transition-all"
+                        aria-label="Next"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Dot indicators */}
+                  {carouselItems.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {carouselItems.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrent(i)}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            i === current ? "bg-white w-5" : "bg-white/50"
+                          }`}
+                          aria-label={`Go to slide ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+
+            {/* ── Right: Two side panels ── */}
+            <div className="flex flex-row md:flex-col gap-4 md:w-[320px]">
+              {/* Side panel 1 */}
+              <SidePanel item={side1} onZoom={setLightbox} placeholder="Upload side image 1 in Gallery admin (category: __side1)" />
+              {/* Side panel 2 */}
+              <SidePanel item={side2} onZoom={setLightbox} placeholder="Upload side image 2 in Gallery admin (category: __side2)" />
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox */}
       <AnimatePresence>
-        {selectedImage && (
+        {lightbox && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
-            onClick={() => setSelectedImage(null)}
+            onClick={() => setLightbox(null)}
           >
-            <button 
-              className="absolute top-6 right-6 text-black hover:text-brand-orange transition-colors"
-              onClick={() => setSelectedImage(null)}
+            <button
+              className="absolute top-6 right-6 text-white hover:text-brand-orange transition-colors"
+              onClick={() => setLightbox(null)}
             >
               <X size={32} />
             </button>
@@ -69,8 +172,8 @@ export default function GallerySection() {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              src={selectedImage}
-              alt="Fullscreen Preview"
+              src={lightbox}
+              alt="Preview"
               className="max-w-full max-h-[90vh] object-contain rounded-md border border-brand-orange/20 shadow-[0_0_50px_rgba(212,175,55,0.2)]"
               onClick={(e) => e.stopPropagation()}
             />
@@ -78,5 +181,42 @@ export default function GallerySection() {
         )}
       </AnimatePresence>
     </section>
+  );
+}
+
+function SidePanel({
+  item,
+  onZoom,
+  placeholder,
+}: {
+  item: GalleryItem | null;
+  onZoom: (url: string) => void;
+  placeholder: string;
+}) {
+  return (
+    <div className="relative flex-1 md:flex-none md:h-[calc(50%-8px)] rounded-2xl overflow-hidden bg-gray-100 group cursor-pointer min-h-[140px]">
+      {item ? (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onClick={() => onZoom(item.image)}
+          />
+          {/* Label overlay */}
+          {item.title && (
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-gray-900 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-brand-orange inline-block" />
+              {item.title}
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="w-full h-full flex items-center justify-center p-4 text-center text-gray-400 text-xs">
+          {placeholder}
+        </div>
+      )}
+    </div>
   );
 }

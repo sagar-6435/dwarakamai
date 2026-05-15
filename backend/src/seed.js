@@ -1,4 +1,31 @@
 const User = require('./models/User');
+const Category = require('./models/Category');
+
+const DEFAULT_CATEGORIES = [
+  'Gifts',
+  'Couple Gifts',
+  'Frames',
+  'Apparel',
+  'Cakes',
+  'Bouquets',
+  'Plants',
+  'Printing',
+  'Events',
+];
+
+const toSlug = (name) =>
+  name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+const seedCategories = async () => {
+  for (const name of DEFAULT_CATEGORIES) {
+    const slug = toSlug(name);
+    const exists = await Category.findOne({ slug });
+    if (!exists) {
+      await Category.create({ name, slug });
+      console.log(`[Seed] Created category: ${name}`);
+    }
+  }
+};
 
 const seedAdmin = async () => {
   if (process.env.SEED_ADMIN !== 'true') return;
@@ -27,4 +54,4 @@ const seedAdmin = async () => {
   console.log(`[Seed] Seeded admin user: ${email}`);
 };
 
-module.exports = seedAdmin;
+module.exports = { seedAdmin, seedCategories };

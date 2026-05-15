@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { Plus, Search, Edit2, Trash2, Filter, X } from "lucide-react";
-import { apiFetch } from "@/lib/api";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Plus, Search, Edit2, Trash2, Filter, X, Upload, ImageIcon } from "lucide-react";
+import { apiFetch, uploadAdminImage } from "@/lib/api";
 import { formatInr } from "@/lib/format";
 
 type Category = { _id: string; name: string };
@@ -30,7 +30,7 @@ const emptyForm = {
   category: "",
   price: "",
   stock: "",
-  imageUrl: "",
+  imageUrl: "", // holds the final URL (existing or after upload)
 };
 
 export default function AdminProductsPage() {
@@ -43,6 +43,11 @@ export default function AdminProductsPage() {
   const [editing, setEditing] = useState<Product | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
+  // image upload state
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     setError(null);
@@ -67,6 +72,9 @@ export default function AdminProductsPage() {
   function openCreate() {
     setEditing(null);
     setForm(emptyForm);
+    setImageFile(null);
+    setImagePreview(null);
+    setUploadError(null);
     setModalOpen(true);
   }
 
@@ -85,7 +93,20 @@ export default function AdminProductsPage() {
       stock: String(p.stock ?? 0),
       imageUrl: img,
     });
+    setImageFile(null);
+    setImagePreview(img || null);
+    setUploadError(null);
     setModalOpen(true);
+  }
+
+  function handleImageSelect(file: File) {
+    setUploadError(null);
+    if (!file.type.startsWith("image/")) {
+      setUploadError("Only image files are allowed.");
+      return;
+    }
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
   }
 
   async function handleSave(e: React.FormEvent) {
@@ -99,7 +120,15 @@ export default function AdminProductsPage() {
         throw new Error("Name and category are required.");
       }
       if (Number.isNaN(price) || price < 0) throw new Error("Invalid price.");
-      const images = form.imageUrl.trim() ? [form.imageUrl.trim()] : [];
+
+      // Upload new image if one was selected
+      let finalImageUrl = form.imageUrl;
+      if (imageFile) {
+        const { url } = await uploadAdminImage(imageFile, "dwarakamai/products");
+        finalImageUrl = url;
+      }
+
+      const images = finalImageUrl.trim() ? [finalImageUrl.trim()] : [];
       const body: Record<string, unknown> = {
         name: form.name.trim(),
         description: form.description.trim() || undefined,
@@ -333,14 +362,57 @@ export default function AdminProductsPage() {
                 </div>
               </div>
               <div>
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-widest block mb-1">Image URL</label>
-                <input
-                  type="url"
-                  placeholder="https://…"
-                  value={form.imageUrl}
-                  onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-orange"
-                />
+                  <label className="text-xs font-bold text-gray-600 uppercase tracking-widest block mb-1">
+                  Product Image
+                </label>
+                <div
+                  className={`relative w-full rounded-xl border-2 border-dashed transition-colors cursor-pointer ${
+                    uploadError ? "border-rose-300 bg-rose-50" : "border-gray-200 bg-gray-50 hover:border-brand-orange"
+                  }`}
+                  onClick={() => fileInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    const file = e.dataTransfer.files?.[0];
+                    if (file) handleImageSelect(file);
+                  }}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleImageSelect(file);
+                      e.target.value = "";
+                    }}
+                  />
+                  {imagePreview ? (
+                    <div className="relative group">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="w-full h-48 object-contain rounded-xl p-2"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+                        <span className="text-white text-xs font-bold flex items-center gap-1">
+                          <Upload size={14} /> Change image
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-8 gap-2 text-gray-400">
+                      <ImageIcon size={32} />
+                      <span className="text-sm font-medium">Click or drag to upload</span>
+                      <span className="text-xs">PNG, JPG, WEBP</span>
+                    </div>
+                  )}
+                </div>
+                {uploadError && (
+                  <p className="mt-1 text-xs text-rose-600">{uploadError}</p>
+                )}
               </div>
               <div className="flex justify-end gap-3 pt-4">
                 <button

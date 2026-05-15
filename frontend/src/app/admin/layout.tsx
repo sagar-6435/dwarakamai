@@ -68,7 +68,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return () => {
       cancel = true;
     };
-  }, [pathname, router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // run once on mount — token lives in localStorage, no need to re-verify on every navigation
 
   if (!ready) {
     return (

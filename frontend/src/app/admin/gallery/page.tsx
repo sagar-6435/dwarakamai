@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { Plus, Search, Image as ImageIcon, Trash2, Tag, X } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Plus, Search, Trash2, Tag, X, Upload, Image as ImageIcon } from "lucide-react";
 import { apiFetch, uploadAdminImage } from "@/lib/api";
 import { formatDate } from "@/lib/format";
 
@@ -21,9 +21,11 @@ export default function AdminGalleryPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [uploading, setUploading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     setError(null);
@@ -41,43 +43,39 @@ export default function AdminGalleryPage() {
     load();
   }, [load]);
 
-  async function onPickFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    setError(null);
-    try {
-      const { url } = await uploadAdminImage(file, "gallery");
-      setImageUrl(url);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Upload failed (check Cloudinary env on server)");
-    } finally {
-      setUploading(false);
-      e.target.value = "";
+  function handleImageSelect(file: File) {
+    setUploadError(null);
+    if (!file.type.startsWith("image/")) {
+      setUploadError("Only image files are allowed.");
+      return;
     }
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
   }
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
-    if (!title.trim() || !imageUrl.trim()) {
+    if (!title.trim() || !imageFile) {
       setError("Title and image are required.");
       return;
     }
     setSaving(true);
     setError(null);
     try {
+      const { url } = await uploadAdminImage(imageFile, "gallery");
       await apiFetch("/gallery", {
         method: "POST",
         body: JSON.stringify({
           title: title.trim(),
-          image: imageUrl.trim(),
+          image: url,
           category: category.trim() || undefined,
         }),
       });
       setModalOpen(false);
       setTitle("");
       setCategory("");
-      setImageUrl("");
+      setImageFile(null);
+      setImagePreview(null);
       await load();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Create failed");
@@ -87,7 +85,7 @@ export default function AdminGalleryPage() {
   }
 
   async function handleDelete(item: GalleryItem) {
-    if (!confirm(`Remove “${item.title}” from gallery?`)) return;
+    if (!confirm(`Remove "${item.title}" from gallery?`)) return;
     setError(null);
     try {
       await apiFetch(`/gallery/${item._id}`, { method: "DELETE" });
@@ -125,7 +123,9 @@ export default function AdminGalleryPage() {
           onClick={() => {
             setTitle("");
             setCategory("");
-            setImageUrl("");
+            setImageFile(null);
+            setImagePreview(null);
+            setUploadError(null);
             setModalOpen(true);
           }}
           className="flex items-center gap-2 px-6 py-2.5 bg-brand-orange text-brand-white font-bold rounded-xl hover:bg-brand-orange-light transition-all shadow-lg shadow-brand-orange/20"
@@ -200,26 +200,50 @@ export default function AdminGalleryPage() {
                 />
               </div>
               <div>
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-widest block mb-1">Image URL</label>
-                <input
-                  type="url"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://… or upload below"
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-brand-orange"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-widest block mb-2">Or upload file (admin)</label>
-                <input type="file" accept="image/*" onChange={onPickFile} className="text-sm text-gray-600" />
-                {uploading && <p className="text-xs text-gray-500 mt-1">Uploading…</p>}
-              </div>
-              {imageUrl && (
-                <div className="relative h-32 w-full rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={imageUrl} alt="" className="w-full h-full object-cover" />
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-widest block mb-1">Image</label>
+                <div
+                  className={`relative w-full rounded-xl border-2 border-dashed transition-colors cursor-pointer ${
+                    uploadError ? "border-rose-300 bg-rose-50" : "border-gray-200 bg-gray-50 hover:border-brand-orange"
+                  }`}
+                  onClick={() => fileInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    const file = e.dataTransfer.files?.[0];
+                    if (file) handleImageSelect(file);
+                  }}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleImageSelect(file);
+                      e.target.value = "";
+                    }}
+                  />
+                  {imagePreview ? (
+                    <div className="relative group/prev">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imagePreview} alt="Preview" className="w-full h-40 object-contain rounded-xl p-2" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover/prev:opacity-100 transition-opacity rounded-xl">
+                        <span className="text-white text-xs font-bold flex items-center gap-1">
+                          <Upload size={14} /> Change image
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-8 gap-2 text-gray-400">
+                      <ImageIcon size={32} />
+                      <span className="text-sm font-medium">Click or drag to upload</span>
+                      <span className="text-xs">PNG, JPG, WEBP</span>
+                    </div>
+                  )}
                 </div>
-              )}
+                {uploadError && <p className="mt-1 text-xs text-rose-600">{uploadError}</p>}
+              </div>
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
@@ -230,10 +254,10 @@ export default function AdminGalleryPage() {
                 </button>
                 <button
                   type="submit"
-                  disabled={saving || uploading}
+                  disabled={saving || !imageFile}
                   className="px-5 py-2.5 rounded-xl bg-brand-orange text-brand-white text-sm font-bold disabled:opacity-60"
                 >
-                  {saving ? "Saving…" : "Save"}
+                  {saving ? "Uploading & Saving…" : "Save"}
                 </button>
               </div>
             </form>

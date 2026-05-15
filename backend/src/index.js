@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const seedAdmin = require('./seed');
+const { seedAdmin, seedCategories } = require('./seed');
 
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
@@ -64,6 +64,7 @@ mongoose
   .then(async () => {
     console.log('Connected to MongoDB');
     await seedAdmin();
+    await seedCategories();
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
     });
