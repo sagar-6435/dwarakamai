@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { seedAdmin, seedCategories } = require('./seed');
+const corsOptions = require('./config/cors');
 
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
@@ -18,14 +19,7 @@ const uploadRoutes = require('./routes/upload');
 const app = express();
 
 // CORS
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+app.use(cors(corsOptions));
 
 // Body parsing
 app.use(express.json());

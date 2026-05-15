@@ -9,7 +9,6 @@ import {
   ShoppingCart, 
   Users, 
   Image as ImageIcon, 
-  Home, 
   BarChart3, 
   LogOut,
   Settings,
@@ -28,7 +27,6 @@ const menuItems = [
   { name: "Orders", icon: <ShoppingCart size={20} />, href: "/admin/orders" },
   { name: "Customers", icon: <Users size={20} />, href: "/admin/customers" },
   { name: "Gallery", icon: <ImageIcon size={20} />, href: "/admin/gallery" },
-  { name: "Homepage", icon: <Home size={20} />, href: "/admin/homepage" },
   { name: "Sales Report", icon: <BarChart3 size={20} />, href: "/admin/reports" },
 ];
 

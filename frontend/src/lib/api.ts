@@ -40,7 +40,7 @@ export async function apiFetch<T>(
 
 export async function uploadAdminImage(
   file: File,
-  folder = "dwarakamai",
+  folder = "gallery",
 ): Promise<{ url: string; publicId: string }> {
   const form = new FormData();
   form.append("file", file);

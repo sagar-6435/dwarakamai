@@ -1,15 +1,21 @@
 const mongoose = require('mongoose');
 
-const gallerySchema = new mongoose.Schema(
+const gallerySetSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
-    image: { type: String, required: true },
-    category: { type: String },
+    // carousel: 6-7 images
+    mainImages: [{ type: String }],
+    // side panel 1 image + label
+    side1Image: { type: String },
+    side1Label: { type: String },
+    // side panel 2 image + label
+    side2Image: { type: String },
+    side2Label: { type: String },
     displayOrder: { type: Number, default: 0 },
     active: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Gallery', gallerySchema);
+module.exports = mongoose.model('Gallery', gallerySetSchema);
